@@ -1,6 +1,5 @@
 ﻿using BepInEx;
 using RoR2;
-using R2API;
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -11,9 +10,8 @@ using UnityEngine;
 namespace RuneFoxMods
 {
 
-  [BepInDependency("com.bepis.r2api")]
   //Change these
-  [BepInPlugin("com.RuneFoxMods.TeleporterTurrets", "TeleporterTurrets", "1.0.0")]
+  [BepInPlugin("com.RuneFoxMods.TeleporterTurrets", "TeleporterTurrets", "1.0.1")]
   public class TeleporterTurrets : BaseUnityPlugin
   {
     public static String[] TeleportableTurrets = new string[]
@@ -37,7 +35,7 @@ namespace RuneFoxMods
         //if(self.mainStateMachine.state != EntityStates.LunarTeleporter.Idle)
         if (!self.isIdle)
         {
-          Chat.AddMessage("teleporter not idle");
+          //Chat.AddMessage("teleporter not idle");
           orig(self, activator);
           return;
         }
@@ -67,9 +65,9 @@ namespace RuneFoxMods
         {
           // 7.5 is the magic number to have all turrets on the teleporter platform
           // needs to be slightly larger for the primordial telepot
-          float Radius = 7.5f;
+          float Radius = 7f;
           float radianInc = Mathf.Deg2Rad * 360f / count;
-          Vector3 point1 = new Vector3(Mathf.Cos(radianInc * i) * Radius, 0.9f, Mathf.Sin(radianInc * i) * Radius);
+          Vector3 point1 = new Vector3(Mathf.Cos(radianInc * i) * Radius, 0.5f, Mathf.Sin(radianInc * i) * Radius);
 
           //float x = self.transform.position.x + Mathf.Sin(3.14f * i / count) * Radius;
           //float y = self.transform.position.y + 0.9f;//keep the turrets from sinking into the teleporter
